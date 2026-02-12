@@ -21,8 +21,15 @@ def pagina_principal():
     cursor = conexao.cursor(dictionary=True)  # entrega os valores das colunas
 
     # executando a consulta
+    cursor.execute("SELECT codigo, cantor, duracao, nome, url_imagem, nome_genero FROM musica;")
 
-    return render_template("principal.html")
+    # recuperando os dados
+    musicas = cursor.fetchall()
+
+    # fechando a conexão
+    conexao.close()
+
+    return render_template("principal.html", musicas= musicas)
 
 @app.route("/admin")
 def pagina_adm():
