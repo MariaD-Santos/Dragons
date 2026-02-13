@@ -25,11 +25,15 @@ def pagina_principal():
 
     # recuperando os dados
     musicas = cursor.fetchall()
+    
+    # executando a consulta do genero
+    cursor.execute("SELECT nome, icone, cor FROM genero;")
 
+    generos = cursor.fetchall()
     # fechando a conexão
     conexao.close()
 
-    return render_template("principal.html", musicas= musicas)
+    return render_template("principal.html", musicas= musicas, generos = generos)
 
 @app.route("/admin")
 def pagina_adm():
