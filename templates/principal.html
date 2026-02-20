@@ -60,10 +60,12 @@
             height: 100%;
         }
 
-        .music-card:hover {
-            border-color: #dad590;
-            background-color: #e9d284;
+        .music-card:hover{
+            border-color: #568051;
+            background-color: #5eaa62;
+            box-shadow: 0 5px 10px rgb(40, 61, 40);
         }
+
 
         .card-image img {
             aspect-ratio: 16/9;
@@ -134,10 +136,11 @@
                 
                 <div class="menu">
                     <p class="menu-label">Categorias</p>
+                    {%for genero in generos%}
                     <ul class="menu-list">
-                        <li><a href="#"><span class="icon"><i class="fa-solid fa-compact-disc"></i></span> Rock</a></li>
-                        <li><a href="#"><span class="icon"><i class="fa-solid fa-compact-disc"></i></span> Pop</a></li>
+                        <li><a href="#"><span class="icon"><i class="fa-solid fa-compact-disc"></i></span>{{genero.nome}}</a></li>
                     </ul>
+                    {%endfor%}
                 </div>
             </aside>
             <main class="column">
@@ -152,7 +155,7 @@
                                 </figure>
                             </div>
                             <div class="card-content p-4">
-                                <span class="music-title is-size-6">
+                                <span class="music-title is-size-6" >
                                     {{ musica.nome }}
                                 </span>
                                 <span class="music-singer">
