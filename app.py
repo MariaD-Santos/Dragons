@@ -1,6 +1,6 @@
 from flask import Flask, redirect, render_template, request
 import mysql.connector
-from model.musica import adicionar_musica, excluir_musica, rec_musicas
+from model.musica import adicionar_musica, alterar_musica, excluir_musica, rec_musicas
 from model.genero import rec_generos
 
 app = Flask(__name__)
@@ -39,5 +39,13 @@ def api_deletar_musica(codigo):
     excluir_musica(codigo)
 
     return redirect("/admin")
+
+@app.route("/musica/alterar/<codigo>/<ativo>")
+def api_alterar_musica(codigo,ativo):
+    alterar_musica(codigo, ativo)
+
+    return redirect("/admin")
+
+
 if __name__ == "__main__":
     app.run(debug=True)

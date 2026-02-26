@@ -35,4 +35,3 @@ VALUES
 "Release",
 "https://64.media.tumblr.com/d0fefaeaad4a06e6b7246381d950bb44/e77f9ece3ba96460-e7/s1280x720/8620ee11a83815da4ef6ce8c335654b3207d3a3f.jpg",
 "Eletrônica");
-

@@ -142,12 +142,22 @@
                         <td class="is-family-monospace has-text-centered">{{musica.duracao}}</td>
                         <td><span class="tag is-dark">{{musica.nome_genero}}</span></td>
                         <td class="has-text-centered">
+                            {% if musica.ativo %}
                             <span class="tag is-success is-light">ATIVO</span>
+                            {% else %}
+                            <span class="tag is-danger is-light">DESATIVADO</span>
+                            {% endif %}
                         </td>
                         <td class="has-text-right px-5">
                             <div class="buttons is-right">
                                 <button class="button is-small is-warning is-light" title="Desativar">
+                                    {% if musica.ativo %}
                                     <i class="fa-solid fa-eye-slash"></i>
+
+                                    {% else %}
+                                    <i class="fa-solid fa-eye"></i>
+
+                                    {% endif %}
                                 </button>
                                 <a href="/musica/delete/{{musica.codigo}}" class="button is-small is-danger is-light" title="Excluir">
                                     <i class="fa-solid fa-trash"></i>

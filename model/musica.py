@@ -5,7 +5,7 @@ def rec_musicas():
     conexao, cursor = conectar()
 
     # executando a consulta
-    cursor.execute("SELECT codigo, cantor, duracao, nome, url_imagem, nome_genero FROM musica;")
+    cursor.execute("SELECT codigo, cantor, duracao, nome, url_imagem, nome_genero, ativo FROM musica;")
 
     # recuperando os dados
     musicas = cursor.fetchall()
@@ -63,5 +63,22 @@ def excluir_musica(codigo:int) -> bool:
         print (e)
         return False
     
-def desativar_musica():
-    pass
+def alterar_musica(codigo:int, ativo:int)->bool:
+    try:
+        """Essa função altera músicas"""
+
+        conexao, cursor = conectar()
+
+        cursor.execute("""
+                        UPDATE musica SET ativo= %s WHERE codigo = %s
+                    """,
+                    [codigo, ativo])
+        
+        conexao.commit()
+        conexao.close()
+
+        return True
+    
+    except Exception as e:
+        print (e)
+        return False
