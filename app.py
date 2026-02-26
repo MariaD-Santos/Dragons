@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request
 import mysql.connector
 from model.musica import adicionar_musica, excluir_musica, rec_musicas
 from model.genero import rec_generos
@@ -30,17 +30,14 @@ def api_inserir_musica():
     duracao = request.form.get("duracao")
 
     if adicionar_musica(cantor,nome_musica,duracao,imagem,genero):
-        return("/admin")
+        return redirect("/admin")
     else:
         return "Erro ao adicionar a música!"
     
-@app.route("/musica/get", methods = ["GET"])
-def api_deletar_musica():
-    codigo = request.form.get("codigo")
+@app.route("/musica/delete/<codigo>")
+def api_deletar_musica(codigo):
+    excluir_musica(codigo)
 
-    if excluir_musica(codigo):
-        return("música excluída")
-    else:
-        return "Erro ao excluir música"
+    return redirect("/admin")
 if __name__ == "__main__":
     app.run(debug=True)
