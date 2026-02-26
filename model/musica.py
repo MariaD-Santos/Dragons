@@ -39,3 +39,26 @@ def adicionar_musica(cantor:str, nome_musica:str, duracao:str, url_imagem:str, g
     except Exception as e:
         print (e)
         return False
+
+
+
+
+def excluir_musica(codigo:int) -> bool:
+    try:
+        """Essa função deleta músicas"""
+
+        conexao, cursor = conectar()
+
+        cursor.execute("""
+                        DELETE FROM musica WHERE codigo= %s
+                    """,
+                    [codigo])
+        
+        conexao.commit()
+        conexao.close()
+
+        return True
+    
+    except Exception as e:
+        print (e)
+        return False
