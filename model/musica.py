@@ -62,3 +62,6 @@ def excluir_musica(codigo:int) -> bool:
     except Exception as e:
         print (e)
         return False
+    
+def desativar_musica():
+    pass
