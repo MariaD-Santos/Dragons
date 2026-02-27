@@ -1,19 +1,39 @@
 from database.conexao import conectar
 
-def rec_musicas():
+def rec_musicas(ativo:bool = False):
     #passo 1 e 2
     conexao, cursor = conectar()
+    if ativo == False:
+        # executando a consulta
+        cursor.execute("SELECT codigo, cantor, duracao, nome, url_imagem, nome_genero, ativo FROM musica;")
 
-    # executando a consulta
-    cursor.execute("SELECT codigo, cantor, duracao, nome, url_imagem, nome_genero, ativo FROM musica;")
-
-    # recuperando os dados
-    musicas = cursor.fetchall()
+        # recuperando os dados
+        musicas = cursor.fetchall()
+        
+        # fechando conexão
+        conexao.close()
+        
+        return musicas
     
-    # fechando conexão
-    conexao.close()
+    else:
 
-    return musicas
+        cursor.execute("""SELECT codigo, cantor, duracao, nome, url_imagem, nome_genero, ativo 
+                       FROM musica 
+                       WHERE ativo = 1;
+                       """
+                       )
+
+        
+
+        musicas = cursor.fetchall()
+        
+        # fechando conexão
+        conexao.close()
+        
+        return musicas
+
+        
+        
 
 def adicionar_musica(cantor:str, nome_musica:str, duracao:str, url_imagem:str, genero:str) -> bool:
     try:

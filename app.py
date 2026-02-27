@@ -11,9 +11,14 @@ app = Flask(__name__)
 def pagina_principal():
 
     generos= rec_generos()
-    musicas= rec_musicas()
+    musicas= rec_musicas(True)
 
     return render_template("principal.html", musicas= musicas, generos = generos)
+
+@app.route("/login")
+def pagina_login():
+    return render_template("cadastro.html")
+
 
 @app.route("/admin")
 def pagina_adm():
