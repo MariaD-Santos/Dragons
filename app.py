@@ -51,8 +51,10 @@ def api_alterar_musica(ativo,codigo):
     return redirect("/admin")
 
 @app.route("/cadastro")
-def pagina_login():
+def pagina_cadastro():
     return render_template("cadastro.html")
+
+
 
 @app.route("/cadastro/post", methods = ["POST"])
 def cadastrar_usuario():
@@ -62,6 +64,10 @@ def cadastrar_usuario():
         return redirect("/home")
     else:
         return "Erro ao adicionar o usuário!"
+
+@app.route("/login")
+def pagina_login():
+    return render_template("login.html")
 
 
 if __name__ == "__main__":
