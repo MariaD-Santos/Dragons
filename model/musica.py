@@ -92,7 +92,7 @@ def alterar_musica(codigo:int, ativo:int)->bool:
         cursor.execute("""
                         UPDATE musica SET ativo= %s WHERE codigo = %s
                     """,
-                    [codigo, ativo])
+                    [ativo, codigo])
         
         conexao.commit()
         conexao.close()

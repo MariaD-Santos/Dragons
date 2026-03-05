@@ -1,5 +1,6 @@
 from flask import Flask, redirect, render_template, request
 import mysql.connector
+from model.cadastro import cadastro_usuario
 from model.musica import adicionar_musica, alterar_musica, excluir_musica, rec_musicas
 from model.genero import rec_generos
 
@@ -15,9 +16,7 @@ def pagina_principal():
 
     return render_template("principal.html", musicas= musicas, generos = generos)
 
-@app.route("/login")
-def pagina_login():
-    return render_template("cadastro.html")
+
 
 
 @app.route("/admin")
@@ -45,11 +44,24 @@ def api_deletar_musica(codigo):
 
     return redirect("/admin")
 
-@app.route("/musica/alterar/<codigo>/<ativo>")
-def api_alterar_musica(codigo,ativo):
-    alterar_musica(codigo, ativo)
+@app.route("/musica/alterar/<ativo>/<codigo>")
+def api_alterar_musica(ativo,codigo):
+    alterar_musica(ativo, codigo)
 
     return redirect("/admin")
+
+@app.route("/cadastro")
+def pagina_login():
+    return render_template("cadastro.html")
+
+@app.route("/cadastro/post", methods = ["POST"])
+def cadastrar_usuario():
+    usuario = request.form.get("usuario")
+    senha = request.form.get("senha")
+    if cadastro_usuario(usuario, senha):
+        return redirect("/home")
+    else:
+        return "Erro ao adicionar o usuário!"
 
 
 if __name__ == "__main__":
