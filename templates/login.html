@@ -125,6 +125,11 @@
     .field.is-grouped {
       display: block;
     }
+
+    p {
+      color: red;
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -149,6 +154,13 @@
       <div class="control">
         <button type="submit" class="button is-link">Entrar</button>
       </div>
+      {% with messages = get_flashed_messages() %}
+      {% for message in messages %}
+      <h1>
+        {{message}}
+      </h1>
+      {%endfor%}
+      {% endwith %}
     </div>
   </form>
 </body>

@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, session
 import mysql.connector
 from model.cadastro import cadastro_usuario
 from model.musica import adicionar_musica, alterar_musica, excluir_musica, rec_musicas
@@ -80,10 +80,19 @@ def autentica_usuario():
     senha = request.form.get("senha")
     usuario = autenticar_usuario(login, senha)
     if usuario:
+        flash(f'Bem-vindo(a) de volta, {usuario}','success')
         session["usuario_logado"] = usuario
         return redirect("/admin")
     else:
+        
+        flash('Usuário ou senha inválidos','danger')
         return redirect("/login")
+        
+
+@app.route("/logoff")
+def logoff():
+    session.clear()
+    return redirect("/login")
 
 
 if __name__ == "__main__":
