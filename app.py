@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template, request, session
 import mysql.connector
 from model.cadastro import cadastro_usuario
 from model.musica import adicionar_musica, alterar_musica, excluir_musica, rec_musicas
@@ -6,6 +6,7 @@ from model.genero import rec_generos
 from model.usuario_model import autenticar_usuario
 
 app = Flask(__name__)
+app.secret_key = "Pneumoultramicroscopicossilicovulcanoconiótico"
 
 @app.route("/")
 
@@ -22,6 +23,9 @@ def pagina_principal():
 
 @app.route("/admin")
 def pagina_adm():
+    if "usuario_logado" not in session:
+        return redirect("/login")
+    
     musicas = rec_musicas()
     generos = rec_generos()
     return render_template("administracao.html", musicas = musicas, generos = generos)
@@ -76,9 +80,10 @@ def autentica_usuario():
     senha = request.form.get("senha")
     usuario = autenticar_usuario(login, senha)
     if usuario:
+        session["usuario_logado"] = usuario
         return redirect("/admin")
     else:
-        return redirect("/cadastro")
+        return redirect("/login")
 
 
 if __name__ == "__main__":
