@@ -6,8 +6,7 @@ def autenticar_usuario(usuario:str, senha:str):
         cursor.execute("""
                     SELECT usuario, senha FROM cadastro
                        WHERE usuario, senha = %s, %s
-                    """)
-        conexao.commit()
+                    """, [usuario, senha])
         conexao.close()
 
 

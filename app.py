@@ -47,7 +47,7 @@ def api_deletar_musica(codigo):
 
 @app.route("/musica/alterar/<ativo>/<codigo>")
 def api_alterar_musica(ativo,codigo):
-    alterar_musica(ativo, codigo)
+    alterar_musica(codigo, ativo)
 
     return redirect("/admin")
 

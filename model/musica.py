@@ -85,6 +85,7 @@ def excluir_musica(codigo:int) -> bool:
     
 def alterar_musica(codigo:int, ativo:int)->bool:
     try:
+        
         """Essa função altera músicas"""
 
         conexao, cursor = conectar()
