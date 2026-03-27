@@ -1,6 +1,6 @@
 USE MusicTube;
 
-INSERT INTO `musictube`.`genero`
+INSERT INTO `MusicTube`.`genero`
 (`nome`,
 `icone`,
 `cor`)
@@ -13,7 +13,7 @@ VALUES
 ("Synthwave","","purple");
 
 
-INSERT INTO `musictube`.`musica`
+INSERT INTO `MusicTube`.`musica`
 (`cantor`,
 `duracao`,
 `nome`,
