@@ -4,7 +4,7 @@ import mysql.connector
 
 
 def conectar():
-        tipo_conexao = "NUVEM"
+        tipo_conexao = "LOCAL"
         if tipo_conexao == "LOCAL":
             conexao = mysql.connector.connect(
                     host="localhost",
